@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 对象就是无序键值对的集合 -->
+        <!-- 如果属性中带-必须给属性加引号如font-weight -->
+        <!-- <h1 :style="{color:'red','font-weight':200}">H1</h1> -->
+        <!-- 将样式对象定义到data中，并直接引用到:style中 -->
+        <!-- <h1 :style="styleObj1">H1</h1> -->
+        <!-- 在:style中通过数组，引用多个data上的样式对象 -->
+        <h1 :style="[styleObj1,styleObj2]">H1</h1>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el: '#app',
+            data: { 
+                styleObj1:{color:'red','font-weight':200},
+                styleObj2:{'font-style':'italic'},
+                message:'欢迎学习vue' 
+            }
+        })
+    </script>
+</body>
+</html>

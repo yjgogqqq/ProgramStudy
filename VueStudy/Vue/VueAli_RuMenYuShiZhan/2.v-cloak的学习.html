@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [v-v-cloak]{
+            display: none;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div id='app'>
+        <!-- 使用v-cloak（插值表达式）能够解决插值表达式闪烁的问题,即刷新页面会有一瞬间显示{{msg}}给用户 -->
+        <p v-cloak>++++++++{{msg}}-------</p>
+        <h4 v-text="msg">=========</h4>
+        <!-- 默认 v-text是没有闪烁问题的 -->
+        <!-- v-text 会覆盖元素中原本的内容，但是 插值表达式 只会替换自己的占位符，不会把整个元素的内容清空 -->
+        <div>{{msg2}}</div>
+        <div v-html='msg2'></div>
+        <!-- v-bind 是vue中，提供的用于绑定属性的指令,如将下行的mytitle当做变量 -->
+        <!-- 注意：v-bind指令可以被简写为：要绑定的属性 -->
+        <!-- v-bind 中，可以写合法的js表达式 -->
+        <input type="button" value="按钮" v-bind:title="mytitle+'123'">
+        <!-- <input type="button" value="按钮" :title="mytitle+'123'" id='btn'> 当不使用vue时添加事件响应需要使用id等元素与js代码配合-->
+
+        <!-- vue中提供了v-on：事件绑定机制 ，缩写：@-->
+        <!-- <input type="button" value="按钮" :title="mytitle+'123'" v-on：click="alert('hello')"> 报错，此种写法不正确-->
+        <!-- 如下，click事件会到js代码中找methods中的show方法 -->
+        <input type="button" value="按钮" :title="mytitle+'123'" v-on：click="show">
+        <input type="button" value="按钮" :title="mytitle+'123'" @click="show">
+    </div>
+    <script>
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                msg:'123',
+                msg2:'<h1>111</h1>',
+                mytitle:'这是一个自己定义的title'
+            },
+            methods:{           //这个methods属性中定义了当前vue实例所有可用的方法
+                show:function(){
+                    alert('hello')
+                }
+            }
+        })
+
+        //不使用vue时。
+        // document.getElementById('btn').onclick=function(){
+        //     alert('hello');
+        // }
+    </script>
+</body>
+</html>

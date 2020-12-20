@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="动起来" @click="move">
+        <input type="button" value="静止" @click="stop" >
+        <h4>{{msg}}</h4>
+    </div>
+    <script>
+        // 注意：在vue实例中，如果想要获取data上的数据，或者想要调用Methods中的方法，必须通过this.数据属性名或this.方法名来进行访问，
+        var vm=new Vue({
+            el:'#app',
+            data: {
+                msg:'...!!!...',
+                intervalid:null     //在data上定义定时器ID
+
+            },
+            methods:{
+                move(){
+                    // console.log(this.msg)
+                    if(this.intervalid!=null) return;
+                    this.intervalid= setInterval(() => {
+                        // 获取第一个字符
+                        var start =this.msg.substring(0,1)
+                        // 获取后面的所有字符
+                        var end =this.msg.substring(1)
+                        this.msg=end+start
+                        // 注意：vm实例，会监听自己身上data中所有数据的改变，只要数据一发生变化，就会自动把最新的数据，从data上同步到页面中；
+                        // 好处：只需要关心数据，不需要关心数据渲染
+                    }, 400);
+                },
+                stop(){
+                    clearInterval(this.intervalid)
+                    this.intervalid=null;
+                }
+
+            }
+        })
+    </script>
+</body>
+</html>

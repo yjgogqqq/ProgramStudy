@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- MVVM,M-V-VM,M:数据，V：view，VM：M-V之间的调度者 -->
+    <!--1.导入Vue的包-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <!--将来New的Vue实例，会控制这个元素中的所有内容-->
+    <!--vue 实例所控制的这个元素区域，就是我们的 V-->
+    <div id="app">
+        <h4>{{message}}</h4>
+        <!-- v-bind 只能实现数据的单身绑定，从M自动绑定到V，无法实现数据的双向绑定 -->
+        <!-- <input type="text" :value="message"> -->
+        <!-- 使用 v-model指令，可以实现 表单元素和model中数据的双向数据绑定 -->
+        <!-- 注意： v-model只能运用在表单元素中 -->
+        <!-- input(radio,text,address,email...) select checkbox textarea-->
+        <input type="text" v-model="message">
+    </div>
+
+    <script>
+        //2. 创建一个vue的实例
+        //当我们导入包之后，在浏览器的内存中，就多了一个vue构造函数
+        // 注意：我们new出来的这个vm对象，就是我们mvvm中的vm调度者
+        var vm=new Vue({
+            el: '#app',  //表示，当前我们new的这个vue实例，要控制页面上的哪个区域
+            //这里的data 就是MVVM中的M，专门用来保存每个页面的数据的
+            data: {      //data 属性中，存放的是el中要用到的数据
+                message:'欢迎学习vue'   //通过vue提供的指令，很方便的就能把数据渲染到页面上，程序员不再手动操作DOM元素了【前端的Vue这类的框架，不提倡去手动操作DOM元素了】
+            },
+            methods:{}
+        })
+    </script>
+</body>
+</html>

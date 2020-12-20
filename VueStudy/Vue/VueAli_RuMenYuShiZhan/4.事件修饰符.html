@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+        .inner{
+            height: 150px;
+            background-color: darkcyan;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 使用 .stop 阻止冒泡(从内到外) -->
+        <!-- <div class='inner' @click="div1handler">
+            <input type="button" value="click" @click.stop="btnHandler">
+        </div> -->
+        <!-- 使用.prevent阻止默认行为 -->
+        <!-- <a href="http://www.baidu.com" @click.prevent="linkClick">有问题，先百度</a> -->
+
+        <!-- 使用.capture 实现捕获触发机制，（从外到内） -->
+        <!-- <div class='inner' @click.capture="div1handler">
+            <input type="button" value="click" @click="btnHandler">
+        </div> -->
+        <!-- 使用.self 实现只有点击当前元素时候，才会触发事件处理函数-->
+        <!-- <div class='inner' @click.self="div1handler">
+            <input type="button" value="click" @clickp="btnHandler">
+        </div> -->
+        <!-- 使用.once只触发一次事件处理函数 -->
+        <!-- <a href="http://www.baidu.com" @click.prevent.once="linkClick">有问题，先百度</a> -->
+    <script>
+        //2. 创建一个vue的实例
+        //当我们导入包之后，在浏览器的内存中，就多了一个vue构造函数
+        // 注意：我们new出来的这个vm对象，就是我们mvvm中的vm调度者
+        var vm=new Vue({
+            el: '#app',  //表示，当前我们new的这个vue实例，要控制页面上的哪个区域
+            //这里的data 就是MVVM中的M，专门用来保存每个页面的数据的
+            data: {      //data 属性中，存放的是el中要用到的数据
+                message:'欢迎学习vue'   //通过vue提供的指令，很方便的就能把数据渲染到页面上，程序员不再手动操作DOM元素了【前端的Vue这类的框架，不提倡去手动操作DOM元素了】
+            },
+            methods:{
+                linkClick(){
+                    console.log('linkClick')
+                },
+                div1handler(){
+                    console.log('111');
+                },
+                btnHandler(){
+                    console.log('222');
+                }
+                
+            }
+        })
+    </script>
+</body>
+</html>
